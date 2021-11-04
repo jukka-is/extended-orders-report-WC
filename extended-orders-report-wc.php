@@ -57,10 +57,11 @@ add_action( 'admin_enqueue_scripts', 'add_extension_register_script' );
 function add_shipping_zone_settings() {
 
     $shipping_zones = array(
-		array(
+	/*	array(
             'label' => __( 'All zones', 'dev-blog-example' ),
             'value' => '-1',
         ),
+	*/
     );
 
 	$defined_zones = WC_Shipping_Zones::get_zones();
