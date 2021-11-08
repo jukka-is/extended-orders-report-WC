@@ -4,7 +4,7 @@
  *
  * Plugin URI:        https://github.com/aaxxiiss/extended-orders-report-WC
  * Description:       Extend WooCommerce analytics orders report by adding features: filter by shipping zone; display cutomer country on table
- * Version:           0.1.0
+ * Version:           0.1.1
  * Author:            Jukka Isokoski
  * Author URI:        https://dev.jukkaisokoski.fi/
  * License:           GPL v2 or later
