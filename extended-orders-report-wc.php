@@ -1,13 +1,12 @@
 <?php
 /**
-Plugin Name: extended-orders-report-WC
- 
-Plugin URI:        https://github.com/aaxxiiss/extended-orders-report-WC
-Description:       Extend WooCommerce analytics orders report by adding features: filter by shipping zone; display shipping country and shipping cost
-Version:           0.1.1
-Author:            Jukka Isokoski
-Author URI:        https://dev.jukkaisokoski.fi/
-License:           GPL v2 or later
+Plugin Name: 		Extend WooCommerce Orders Report
+Plugin URI:       	https://github.com/aaxxiiss/extended-orders-report-WC
+Description:      	Extend WooCommerce analytics orders report by adding features: filter by shipping zone; display shipping country and shipping cost
+Version:          	0.1.1
+Author:           	Jukka Isokoski
+Author URI:       	https://dev.jukkaisokoski.fi/
+License:          	GPL v2 or later
  * 
  * @package WooCommerce\Admin
  */
