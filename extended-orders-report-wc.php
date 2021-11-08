@@ -94,7 +94,7 @@ function add_shipping_zone_settings() {
 add_action( 'init', 'add_shipping_zone_settings' );
 
 
-// Add shipping_zone parameter as a query argument to the Orders Data Store and Orders Stats Data Store.
+// Add shipping zone ID parameter as a query argument to the Orders Data Store and Orders Stats Data Store.
 // Those data stores use query arguments for caching purposes.
 // By adding the parameter, new database query will be performed when the parameter changes.
 
@@ -121,8 +121,8 @@ add_filter( 'woocommerce_analytics_orders_stats_query_args', 'apply_shipping_zon
 function add_join_subquery( $clauses ) {
     global $wpdb;
  
-	// add shipping zone information
-    $clauses[] = "JOIN {$wpdb->postmeta} shipping_zone_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = shipping_zone_postmeta.post_id";
+	// add shipping country information
+    $clauses[] = "JOIN {$wpdb->postmeta} shipping_country_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = shipping_country_postmeta.post_id";
 
 	// add shipping cost information
 	$clauses[] = "JOIN {$wpdb->postmeta} shipping_cost_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = shipping_cost_postmeta.post_id";
@@ -143,12 +143,12 @@ function add_where_subquery( $clauses ) {
          $zone_id  = sanitize_text_field( wp_unslash( $_GET['zone_id'] ) );
     }
 
-	// add shiping zone when all zones are selected
+	// add shiping country when all zones are selected
  	if ($zone_id === '-1') {
-    	$clauses[] = "AND shipping_zone_postmeta.meta_key = '_shipping_country'";
+    	$clauses[] = "AND shipping_country_postmeta.meta_key = '_shipping_country'";
 	}
 
-	// add shiping zone when Rest of the world is selected
+	// add shiping countries when Rest of the world is selected
 	else if ($zone_id === '0') {
 
 		$zone_ids = array();
@@ -161,16 +161,16 @@ function add_where_subquery( $clauses ) {
 		
 		$country_query = get_country_query($country_list);
 
-		$clauses[] = "AND shipping_zone_postmeta.meta_key = '_shipping_country' AND shipping_zone_postmeta.meta_value NOT IN {$country_query}";
+		$clauses[] = "AND shipping_country_postmeta.meta_key = '_shipping_country' AND shipping_country_postmeta.meta_value NOT IN {$country_query}";
 	}
 
-	// add shiping zone when one of the zones is selected
+	// add shiping countries when one of the zones is selected
 	else if ($zone_id !== '0') {
 		$country_list = get_country_list([$zone_id]);
 		
 		$country_query = get_country_query($country_list);
 
-		$clauses[] = "AND shipping_zone_postmeta.meta_key = '_shipping_country' AND shipping_zone_postmeta.meta_value IN {$country_query}";
+		$clauses[] = "AND shipping_country_postmeta.meta_key = '_shipping_country' AND shipping_country_postmeta.meta_value IN {$country_query}";
 	}
 
 	// add shipping cost
@@ -188,8 +188,8 @@ add_filter( 'woocommerce_analytics_clauses_where_orders_stats_interval', 'add_wh
 
 function add_select_subquery( $clauses ) {
 
-	// add shipping zone
-    $clauses[] = ', shipping_zone_postmeta.meta_value AS shipping_zone';
+	// add shipping country
+    $clauses[] = ', shipping_country_postmeta.meta_value AS shipping_country';
 
 	// add shipping cost
 	$clauses[] = ', shipping_cost_postmeta.meta_value AS shipping_cost';

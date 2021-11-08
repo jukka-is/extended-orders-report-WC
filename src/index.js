@@ -35,11 +35,7 @@ const addTableColumn = reportTableData => {
         ...reportTableData.headers,
         {
             label: "Country",
-            key: 'coutry',
-        },
-        {
-            label: "Zone",
-            key: 'shipping_zone',
+            key: 'shipping_country',
         },
         {
             label: "Shipping",
@@ -52,12 +48,8 @@ const addTableColumn = reportTableData => {
         const newRow = [
             ...row,
             {
-                display: item.extended_info.customer.country,
-                value: item.extended_info.customer.country,
-            },
-            {
-                display: item.shipping_zone,
-                value: item.shipping_zone,
+                display: item.shipping_country,
+                value: item.shipping_country,
             },
             {
                 display: formatter.format(item.shipping_cost),
