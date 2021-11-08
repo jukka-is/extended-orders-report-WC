@@ -37,15 +37,32 @@ const addTableColumn = reportTableData => {
             label: "Country",
             key: 'coutry',
         },
+        {
+            label: "Zone",
+            key: 'shipping_zone',
+        },
+        {
+            label: "Shipping",
+            key: 'shipping_cost',
+        },
 
     ];
     const newRows = reportTableData.rows.map((row, index) => {
         const item = reportTableData.items.data[index];
+        console.log(item);
         const newRow = [
             ...row,
             {
                 display: item.extended_info.customer.country,
                 value: item.extended_info.customer.country,
+            },
+            {
+                display: item.shipping_zone,
+                value: item.shipping_zone,
+            },
+            {
+                display: formatter.format(item.shipping_cost),
+                value: item.shipping_cost,
             },
 
         ];
@@ -59,4 +76,10 @@ const addTableColumn = reportTableData => {
 };
 
 addFilter('woocommerce_admin_report_table', 'dev-blog-example', addTableColumn);
+
+
+const formatter = new Intl.NumberFormat('fi-FI', {
+    style: 'currency',
+    currency: 'EUR'
+})
 
