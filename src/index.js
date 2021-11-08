@@ -49,7 +49,6 @@ const addTableColumn = reportTableData => {
     ];
     const newRows = reportTableData.rows.map((row, index) => {
         const item = reportTableData.items.data[index];
-        console.log(item);
         const newRow = [
             ...row,
             {
